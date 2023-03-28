@@ -27,4 +27,5 @@ git config --global user.email "workload@conclusion.com"
 git config --global user.name "Workload user"
 git add .
 git commit -m "Added $new_workload"
+git remote add origin https://github.com/StefanVasilev94/$repo_name.git
 git push -u origin $new_branch_name
