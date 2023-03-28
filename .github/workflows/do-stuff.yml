@@ -1,0 +1,29 @@
+name: Change file and create pull request
+
+on: 
+  workflow_dispatch:
+    inputs:
+       workload_name:
+        description: 'Name of the workload to add'
+        required: true
+
+jobs:
+  change_file_and_create_pr:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Add workload to file
+      run: |
+        bash ./scripts/add_workload.sh ${{ inputs.workload_name }}
+
+    - name: Create pull request
+      uses: peter-evans/create-pull-request@v3.11.0
+      with:
+        commit-message: "Update file"
+        branch: "main"
+        title: "Update file"
+        body: "This pull request updates the file with new content."
+        token: ${{ secrets.GITHUB_TOKEN }}
