@@ -17,6 +17,8 @@ fi
 
 cd $repo_name
 
+git checkout -b $new_branch_name
+
 # Set the name of the YAML file
 yaml_file="workload.yml"
 
