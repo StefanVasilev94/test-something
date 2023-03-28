@@ -27,6 +27,7 @@ jobs:
     - name: Push changes to new branch
       uses: ad-m/github-push-action@master
       with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ env.BRANCH_NAME }}
 
     - name: Create pull request
@@ -37,4 +38,4 @@ jobs:
         base: main
         title: "Update file"
         body: "Adds workload ${{ inputs.workload_name }} to the list"
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ env.GITHUB_TOKEN }}
