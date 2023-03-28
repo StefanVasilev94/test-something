@@ -18,7 +18,12 @@ jobs:
     - name: Add workload to file
       run: |
         bash ./scripts/add_workload.sh ${{ inputs.workload_name }} "test-something" ${{ secrets.GITHUB_TOKEN }} "workloads/${{ inputs.workload_name }}"
-        
+
+    - name: Push changes to new branch
+      uses: ad-m/github-push-action@master
+      with:
+        branch: "workloads/${{ inputs.workload_name }}"
+
     - name: Create pull request
       uses: peter-evans/create-pull-request@v3.11.0
       with:
