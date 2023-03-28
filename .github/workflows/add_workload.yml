@@ -9,6 +9,7 @@ on:
 
 env:
   REPO_NAME: test-something
+  YML_FILE_NAME: workload.yml
   BRANCH_NAME: "workloads/${{ inputs.workload_name }}"
   GITHUB_TOKEN: ${{ secrets.PAT }}
 
@@ -24,14 +25,9 @@ jobs:
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
 
     - name: Add workload to file
+      shell: bash
       run: |
-        bash ./scripts/add_workload.sh ${{ inputs.workload_name }} ${{ env.REPO_NAME }} ${{ secrets.GITHUB_TOKEN }} ${{ env.BRANCH_NAME }}
-
-    # - name: Push changes to new branch
-    #   uses: ad-m/github-push-action@master
-    #   with:
-    #     github_token: ${{ env.GITHUB_TOKEN }}
-    #     branch: ${{ env.BRANCH_NAME }}
+        yq e ".jobs.terraform.strategy.matrix.workload += [\"${{ inputs.workload_name }}\"]" -i "${{ env.YML_FILE_NAME }}"
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v4
