@@ -40,4 +40,4 @@ jobs:
         branch: ${{ env.BRANCH_NAME }}
         title: "Update file"
         body: "Adds workload ${{ inputs.workload_name }} to the list"
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ env.GITHUB_TOKEN }}
