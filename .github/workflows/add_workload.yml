@@ -7,10 +7,6 @@ on:
         description: 'Name of the workload to add'
         required: true
 
-permissions:
-  contents: read
-  pull-requests: write
-
 jobs:
   change_file_and_create_pr:
     runs-on: ubuntu-latest
