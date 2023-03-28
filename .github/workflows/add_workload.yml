@@ -7,6 +7,10 @@ on:
         description: 'Name of the workload to add'
         required: true
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   change_file_and_create_pr:
     runs-on: ubuntu-latest
@@ -27,7 +31,8 @@ jobs:
       uses: peter-evans/create-pull-request@v3.11.0
       with:
         commit-message: "Update workloads"
-        branch: "main"
+        branch: "workloads/${{ inputs.workload_name }}"
+        base: main
         title: "Update file"
         body: "Adds workload ${{ inputs.workload_name }} to the list"
         token: ${{ secrets.GITHUB_TOKEN }}
