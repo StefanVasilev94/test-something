@@ -25,8 +25,6 @@ yaml_file="workload.yml"
 # Adds the new value to the workload array
 yq e ".jobs.terraform.strategy.matrix.workload += [\"$new_workload\"]" -i "$yaml_file"
 
-git config --global user.email "workload@conclusion.com"
-git config --global user.name "Workload user"
 git add .
 git commit -m "Added $new_workload"
 git push origin $new_branch_name
