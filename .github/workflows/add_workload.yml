@@ -20,15 +20,8 @@ jobs:
 
     - name: Add workload to file
       run: |
-        bash ./scripts/add_workload.sh ${{ inputs.workload_name }} "test-something" ${{ secrets.GITHUB_TOKEN }}
+        bash ./scripts/add_workload.sh ${{ inputs.workload_name }} "test-something" ${{ secrets.GITHUB_TOKEN }} "workloads/${{ inputs.workload_name }}"
         cd "test-something"
-
-    - name: Commit changes
-      run: |
-        git config --global user.email "workload@conclusion.com"
-        git config --global user.name "Workload user"
-        git add .
-        git commit -m "Added ${{ inputs.workload_name }}"
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v3.11.0
