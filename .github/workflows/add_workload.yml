@@ -37,8 +37,8 @@ jobs:
       uses: peter-evans/create-pull-request@v4
       with:
         commit-message: "Update workloads"
-        branch: main
-        base: ${{ env.BRANCH_NAME }}
+        branch: ${{ env.BRANCH_NAME }}
+        base: main
         title: "Update file"
         body: "Adds workload ${{ inputs.workload_name }} to the list"
         token: ${{ secrets.GITHUB_TOKEN }}
