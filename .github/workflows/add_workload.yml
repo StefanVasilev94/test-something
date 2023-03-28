@@ -1,4 +1,4 @@
-name: Change file and create pull request
+name: Adds workload to the terraform yml
 
 on: 
   workflow_dispatch:
@@ -15,9 +15,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Create new branch
+      run: git checkout -b workload/${{ inputs.workload_name }}
+
     - name: Add workload to file
       run: |
         bash ./scripts/add_workload.sh ${{ inputs.workload_name }}
+
+    - name: Commit changes
+      run: |
+        git config --global user.email "workload@conclusion.com"
+        git config --global user.name "Workload user"
+        git add .
+        git commit -m "Added ${{ inputs.workload_name }}"
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v3.11.0
