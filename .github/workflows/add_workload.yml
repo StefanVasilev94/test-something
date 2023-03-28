@@ -8,10 +8,9 @@ on:
         required: true
 
 env:
-  REPO_NAME: test-something
   YML_FILE_NAME: workload.yml
-  BRANCH_NAME: "workloads/${{ inputs.workload_name }}"
   GITHUB_TOKEN: ${{ secrets.PAT }}
+  BRANCH_NAME: "workloads/${{ inputs.workload_name }}"
 
 jobs:
   change_file_and_create_pr:
