@@ -20,7 +20,8 @@ jobs:
 
     - name: Add workload to file
       run: |
-        bash ./scripts/add_workload.sh ${{ inputs.workload_name }}
+        bash ./scripts/add_workload.sh ${{ inputs.workload_name }} "test-something" ${{ secrets.GITHUB_TOKEN }}
+        cd "test-something"
 
     - name: Commit changes
       run: |
