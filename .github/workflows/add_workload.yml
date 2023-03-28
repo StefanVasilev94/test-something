@@ -7,6 +7,11 @@ on:
         description: 'Name of the workload to add'
         required: true
 
+env:
+  REPO_NAME: test-something
+  BRANCH_NAME: "workloads/${{ inputs.workload_name }}"
+  GITHUB_TOKEN: ${{ secrets.PAT }}
+
 jobs:
   change_file_and_create_pr:
     runs-on: ubuntu-latest
@@ -17,18 +22,18 @@ jobs:
 
     - name: Add workload to file
       run: |
-        bash ./scripts/add_workload.sh ${{ inputs.workload_name }} "test-something" ${{ secrets.GITHUB_TOKEN }} "workloads/${{ inputs.workload_name }}"
+        bash ./scripts/add_workload.sh ${{ inputs.workload_name }} ${{ env.REPO_NAME }} ${{ secrets.GITHUB_TOKEN }} ${{ env.BRANCH_NAME }}
 
     - name: Push changes to new branch
       uses: ad-m/github-push-action@master
       with:
-        branch: "workloads/${{ inputs.workload_name }}"
+        branch: ${{ env.BRANCH_NAME }}
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v3.11.0
       with:
         commit-message: "Update workloads"
-        branch: "workloads/${{ inputs.workload_name }}"
+        branch: ${{ env.BRANCH_NAME }}
         base: main
         title: "Update file"
         body: "Adds workload ${{ inputs.workload_name }} to the list"
