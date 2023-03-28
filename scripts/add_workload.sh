@@ -27,4 +27,4 @@ git config --global user.email "workload@conclusion.com"
 git config --global user.name "Workload user"
 git add .
 git commit -m "Added $new_workload"
-git push origin $new_branch_name
+git push -u origin $new_branch_name
