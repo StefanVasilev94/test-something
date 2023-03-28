@@ -34,6 +34,6 @@ jobs:
       with:
         commit-message: "Update workloads"
         branch: ${{ env.BRANCH_NAME }}
-        title: "Update file"
-        body: "Adds workload ${{ inputs.workload_name }} to the list"
+        title: "Added workload ${{ inputs.workload_name }}"
+        body: "Adds workload ${{ inputs.workload_name }} to the workload list"
         token: ${{ env.GITHUB_TOKEN }}
