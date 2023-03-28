@@ -41,4 +41,4 @@ jobs:
         base: main
         title: "Update file"
         body: "Adds workload ${{ inputs.workload_name }} to the list"
-        token: ${{ env.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
