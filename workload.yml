@@ -21,6 +21,7 @@ jobs:
           - prod
         workload:
           - general-app1
+          - test
     steps:
       - name: Checkout
         uses: actions/checkout@v3
