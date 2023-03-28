@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Create new branch
-      run: git checkout -b workload/${{ inputs.workload_name }}
+      run: git checkout -b workloads/${{ inputs.workload_name }}
 
     - name: Add workload to file
       run: |
@@ -32,8 +32,8 @@ jobs:
     - name: Create pull request
       uses: peter-evans/create-pull-request@v3.11.0
       with:
-        commit-message: "Update file"
-        branch: "main"
+        commit-message: "Update workloads"
+        branch: "workloads/${{ inputs.workload_name }}"
         title: "Update file"
-        body: "This pull request updates the file with new content."
+        body: "Adds workload ${{ inputs.workload_name }} to the list"
         token: ${{ secrets.GITHUB_TOKEN }}
